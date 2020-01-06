@@ -10,6 +10,7 @@
           "displayName": "File name",
           "propertyName": "fileName",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path and name of the file to be read from the file system.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -22,6 +23,7 @@
           "displayName": "Base path",
           "propertyName": "basePath",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "Optional base path from which files with the given \u003ci\u003eFile name\u003c/i\u003e will be read from. The final file will be read from \u003cb\u003eBase Path + File Name\u003c/b\u003e",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -34,6 +36,7 @@
           "displayName": "Read mode",
           "propertyName": "mode",
           "defaultValue": "DEFAULT",
+          "propertyInfo": "Determines the read strategy. When \u003ci\u003eDefault\u003c/i\u003e the file is completely read into memory. When \u003ci\u003eStream\u003c/i\u003e the file is read only on demand only when the message payload is being consumed. This is the preferred method to read large files from the filesystem.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeEnumDescriptor",
             "instance": {
@@ -50,6 +53,7 @@
           "displayName": "Auto mime type",
           "propertyName": "autoMimeType",
           "defaultValue": "true",
+          "propertyInfo": "If true, the mime type of the payload is determined from the extension of the file read.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -62,6 +66,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "The mime type of the file read from the filesystem.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -217,6 +222,7 @@
                   "displayName": "Lock file",
                   "propertyName": "lockFile",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "If true a lock on the file is acquired before reading its content.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -230,6 +236,7 @@
                   "displayName": "Lock retry max attempts",
                   "propertyName": "lockRetryMaxAttempts",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "Sets the max lock attempts before throwing an error.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -248,6 +255,7 @@
                   "displayName": "Lock retry wait time (ms)",
                   "propertyName": "lockRetryWaitTime",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "Sets the wait time between two file lock attempts.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -292,6 +300,7 @@
           "displayName": "File name",
           "propertyName": "filePath",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path and name of the file to be written on the file system.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -304,6 +313,7 @@
           "displayName": "Base path",
           "propertyName": "basePath",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "Optional base path from which files with the given \u003ci\u003eFile name\u003c/i\u003e will be written to. The final file will be written into \u003cb\u003eBase Path + File Name\u003c/b\u003e.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -316,6 +326,7 @@
           "displayName": "Write mode",
           "propertyName": "mode",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "Sets the file write mode.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeEnumDescriptor",
             "instance": {
@@ -344,6 +355,7 @@
                   "displayName": "Create directories",
                   "propertyName": "createParentDirectory",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "If true, missing directories will be created on the filesystem before writing the file.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -356,6 +368,7 @@
                   "displayName": "Lock file",
                   "propertyName": "lockFile",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "If true a lock on the file is acquired before writing the content.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -369,6 +382,7 @@
                   "displayName": "Lock retry max attempts",
                   "propertyName": "lockRetryMaxAttempts",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "Sets the max lock attempts before throwing an error.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -387,6 +401,7 @@
                   "displayName": "Lock retry wait time (ms)",
                   "propertyName": "lockRetryWaitTime",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "Sets the wait time between two file lock attempts.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {

@@ -7,6 +7,7 @@ import com.reedelk.file.write.WriteMode;
 import com.reedelk.file.write.Writer;
 import com.reedelk.runtime.api.annotation.ESBComponent;
 import com.reedelk.runtime.api.annotation.Property;
+import com.reedelk.runtime.api.annotation.PropertyInfo;
 import com.reedelk.runtime.api.component.OnResult;
 import com.reedelk.runtime.api.component.ProcessorAsync;
 import com.reedelk.runtime.api.converter.ConverterService;
@@ -40,12 +41,16 @@ public class FileWrite implements ProcessorAsync {
     private ConverterService converterService;
 
     @Property("File name")
+    @PropertyInfo("The path and name of the file to be written on the file system.")
     private DynamicString filePath;
 
     @Property("Base path")
+    @PropertyInfo("Optional base path from which files with the given <i>File name</i> will be written to. " +
+            "The final file will be written into <b>Base Path + File Name</b>.")
     private String basePath;
 
     @Property("Write mode")
+    @PropertyInfo("Sets the file write mode.")
     private WriteMode mode;
 
     @Property("Configuration")

@@ -32,17 +32,24 @@ public class FileRead implements ProcessorSync {
     private ScriptEngineService service;
 
     @Property("File name")
+    @PropertyInfo("The path and name of the file to be read from the file system.")
     private DynamicString fileName;
 
     @Property("Base path")
+    @PropertyInfo("Optional base path from which files with the given <i>File name</i> will be read from. " +
+            "The final file will be read from <b>Base Path + File Name</b>")
     private String basePath;
 
     @Property("Read mode")
     @Default("DEFAULT")
+    @PropertyInfo("Determines the read strategy. When <i>Default</i> the file is completely read into memory. " +
+            "When <i>Stream</i> the file is read only on demand only when the message payload is being consumed. " +
+            "This is the preferred method to read large files from the filesystem.")
     private ReadMode mode;
 
     @Property("Auto mime type")
     @Default("true")
+    @PropertyInfo("If true, the mime type of the payload is determined from the extension of the file read.")
     private boolean autoMimeType;
 
     @Property("Mime type")
@@ -50,6 +57,7 @@ public class FileRead implements ProcessorSync {
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
+    @PropertyInfo("The mime type of the file read from the filesystem.")
     private String mimeType;
 
     @Property("Configuration")

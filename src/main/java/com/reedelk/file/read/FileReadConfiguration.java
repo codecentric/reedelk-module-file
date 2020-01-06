@@ -1,9 +1,6 @@
 package com.reedelk.file.read;
 
-import com.reedelk.runtime.api.annotation.Collapsible;
-import com.reedelk.runtime.api.annotation.Hint;
-import com.reedelk.runtime.api.annotation.Property;
-import com.reedelk.runtime.api.annotation.When;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.Implementor;
 import org.osgi.service.component.annotations.Component;
 
@@ -14,16 +11,19 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 public class FileReadConfiguration implements Implementor {
 
     @Property("Lock file")
+    @PropertyInfo("If true a lock on the file is acquired before reading its content.")
     private Boolean lockFile;
 
     @Property("Lock retry max attempts")
     @Hint("3")
     @When(propertyName = "lockFile", propertyValue = "true")
+    @PropertyInfo("Sets the max lock attempts before throwing an error.")
     private Integer lockRetryMaxAttempts;
 
     @Property("Lock retry wait time (ms)")
     @Hint("500")
     @When(propertyName = "lockFile", propertyValue = "true")
+    @PropertyInfo("Sets the wait time between two file lock attempts.")
     private Long lockRetryWaitTime;
 
     @Property("Read buffer size")
