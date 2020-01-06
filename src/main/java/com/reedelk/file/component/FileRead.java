@@ -37,7 +37,7 @@ public class FileRead implements ProcessorSync {
 
     @Property("Base path")
     @PropertyInfo("Optional base path from which files with the given <i>File name</i> will be read from. " +
-            "The final file will be read from <b>Base Path + File Name</b>")
+            "The final file will be read from <b>Base Path + File Name</b>.")
     private String basePath;
 
     @Property("Read mode")
