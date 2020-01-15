@@ -54,7 +54,7 @@ public class FileRead implements ProcessorSync {
 
     @Property("Mime type")
     @MimeTypeCombo
-    @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Default("text/xml") // TODO: 0.7 Release: replace with constant and add to Mime Types when added to the API.
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @PropertyInfo("The mime type of the file read from the filesystem.")
