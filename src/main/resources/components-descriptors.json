@@ -2,6 +2,27 @@
   "componentDescriptors": [
     {
       "hidden": false,
+      "displayName": "File Delete",
+      "fullyQualifiedName": "com.reedelk.file.component.FileDelete",
+      "componentType": "PROCESSOR",
+      "componentPropertyDescriptors": [
+        {
+          "displayName": "File name",
+          "propertyName": "fileName",
+          "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path and name of the file to be deleted from the file system.",
+          "propertyType": {
+            "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
+            "instance": {
+              "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicString"
+            }
+          },
+          "whenDescriptors": []
+        }
+      ]
+    },
+    {
+      "hidden": false,
       "displayName": "File Read",
       "fullyQualifiedName": "com.reedelk.file.component.FileRead",
       "componentType": "PROCESSOR",
@@ -65,7 +86,7 @@
         {
           "displayName": "Mime type",
           "propertyName": "mimeType",
-          "defaultValue": "text/plain",
+          "defaultValue": "text/xml",
           "propertyInfo": "The mime type of the file read from the filesystem.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",

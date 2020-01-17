@@ -28,9 +28,6 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 @Component(service = FileRead.class, scope = ServiceScope.PROTOTYPE)
 public class FileRead implements ProcessorSync {
 
-    @Reference
-    private ScriptEngineService service;
-
     @Property("File name")
     @PropertyInfo("The path and name of the file to be read from the file system.")
     private DynamicString fileName;
@@ -62,6 +59,9 @@ public class FileRead implements ProcessorSync {
 
     @Property("Configuration")
     private FileReadConfiguration configuration;
+
+    @Reference
+    private ScriptEngineService service;
 
     private ReadStrategy strategy;
 
