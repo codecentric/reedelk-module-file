@@ -86,7 +86,7 @@
         {
           "displayName": "Mime type",
           "propertyName": "mimeType",
-          "defaultValue": "text/xml",
+          "defaultValue": "application/octet-stream",
           "propertyInfo": "The mime type of the file read from the filesystem.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",

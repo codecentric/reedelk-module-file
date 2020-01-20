@@ -5,7 +5,6 @@ import com.reedelk.file.exception.FileDeleteException;
 import com.reedelk.runtime.api.annotation.ESBComponent;
 import com.reedelk.runtime.api.annotation.Property;
 import com.reedelk.runtime.api.annotation.PropertyInfo;
-import com.reedelk.runtime.api.commons.ConfigurationPreconditions;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.message.*;
 import com.reedelk.runtime.api.script.ScriptEngineService;
@@ -21,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotNull;
 import static java.lang.String.format;
 
 @ESBComponent("File Delete")
@@ -36,7 +36,7 @@ public class FileDelete implements ProcessorSync {
 
     @Override
     public void initialize() {
-        ConfigurationPreconditions.requireNotNull(fileName, "The file name must not be null");
+        requireNotNull(FileDelete.class, fileName, "The file name must not be null");
     }
 
     @Override
