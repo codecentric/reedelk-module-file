@@ -6,7 +6,11 @@ import com.reedelk.runtime.api.annotation.ESBComponent;
 import com.reedelk.runtime.api.annotation.Property;
 import com.reedelk.runtime.api.annotation.PropertyInfo;
 import com.reedelk.runtime.api.component.ProcessorSync;
-import com.reedelk.runtime.api.message.*;
+import com.reedelk.runtime.api.flow.FlowContext;
+import com.reedelk.runtime.api.message.DefaultMessageAttributes;
+import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
+import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
 import org.osgi.service.component.annotations.Component;
@@ -40,7 +44,7 @@ public class FileDelete implements ProcessorSync {
     }
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
         return service.evaluate(fileName, flowContext, message).flatMap(evaluatedFileNameToRemove -> {
             try {
                 Files.delete(Paths.get(evaluatedFileNameToRemove));

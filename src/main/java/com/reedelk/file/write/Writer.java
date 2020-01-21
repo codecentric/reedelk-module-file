@@ -106,7 +106,7 @@ public class Writer {
 
             // On error map the exception and invoke the error callback.
             Exception realException = mapException(path, throwable);
-            callback.onError(realException, flowContext);
+            callback.onError(flowContext, realException);
 
         }).doOnSuccess(initial -> {
 
@@ -115,7 +115,7 @@ public class Writer {
                     of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis()));
             Message outMessage = MessageBuilder.get().attributes(attributes).empty().build();
 
-            callback.onResult(outMessage, flowContext);
+            callback.onResult(flowContext, outMessage);
 
         }).subscribeOn(Schedulers.elastic())
                 .subscribe(); // Immediately fire the writing into the buffer

@@ -59,7 +59,7 @@ public class FileWrite implements ProcessorAsync {
     private final Writer writer = new Writer();
 
     @Override
-    public void apply(Message message, FlowContext flowContext, OnResult callback) {
+    public void apply(FlowContext flowContext, Message message, OnResult callback) {
 
 
         Optional<String> evaluated = scriptService.evaluate(filePath, flowContext, message);
@@ -90,11 +90,11 @@ public class FileWrite implements ProcessorAsync {
                 String errorMessage = finalPath != null ?
                         ERROR_FILE_WRITE_WITH_PATH.format(finalPath.toString(), rootCauseMessageOf(exception)) :
                         ERROR_FILE_WRITE.format(rootCauseMessageOf(exception));
-                callback.onError(new FileWriteException(errorMessage, exception), flowContext);
+                callback.onError(flowContext, new FileWriteException(errorMessage, exception));
             }
 
         } else {
-            callback.onError(new ESBException("Could not write file"), flowContext);
+            callback.onError(flowContext, new ESBException("Could not write file"));
         }
     }
 
