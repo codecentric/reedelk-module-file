@@ -12,7 +12,7 @@ import com.reedelk.runtime.api.message.DefaultMessageAttributes;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
-import com.reedelk.runtime.api.message.content.utils.TypedPublisher;
+import com.reedelk.runtime.api.message.content.TypedPublisher;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
