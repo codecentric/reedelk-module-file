@@ -1,10 +1,11 @@
 package com.reedelk.file.read;
 
-import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
+import org.reactivestreams.Publisher;
 
 import java.nio.file.Path;
 
 public interface ReadStrategy {
-    TypedContent<?> read(Path path, ReadConfigurationDecorator config, MimeType actualMimeType);
+
+    Publisher<byte[]> read(Path path, ReadConfigurationDecorator config);
+
 }

@@ -11,12 +11,12 @@ import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
+import org.reactivestreams.Publisher;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -92,9 +92,12 @@ public class FileRead implements ProcessorSync {
             MessageAttributes attributes = new DefaultMessageAttributes(FileRead.class,
                     of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis()));
 
-            TypedContent<?> content = strategy.read(path, config, actualMimeType);
+            Publisher<byte[]> data = strategy.read(path, config);
 
-            return MessageBuilder.get().attributes(attributes).typedContent(content).build();
+            return MessageBuilder.get()
+                    .attributes(attributes)
+                    .withBinary(data, actualMimeType)
+                    .build();
 
         }).orElseThrow(() -> new NotValidFileException(FILE_NAME_ERROR.format(fileName.toString())));
     }

@@ -1,17 +1,21 @@
 package com.reedelk.file.read;
 
-import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
+import com.reedelk.runtime.api.commons.StreamUtils;
+import org.reactivestreams.Publisher;
+import reactor.core.publisher.Mono;
 
 import java.nio.file.Path;
 
 public class ReadStrategyDefault extends ReadStrategyStream {
 
     @Override
-    public TypedContent<?> read(Path path, ReadConfigurationDecorator config, MimeType actualMimeType) {
-        TypedContent<?> read = super.read(path, config, actualMimeType);
+    public Publisher<byte[]> read(Path path, ReadConfigurationDecorator config) {
+
+        Publisher<byte[]> read = super.read(path, config);
+
         // We immediately consume the content.
-        read.consume();
-        return read;
+        byte[] consume = StreamUtils.FromByteArray.consume(read);
+
+        return Mono.just(consume);
     }
 }
