@@ -2,9 +2,7 @@ package com.reedelk.file.component;
 
 import com.reedelk.file.delete.FileDeleteAttribute;
 import com.reedelk.file.exception.FileDeleteException;
-import com.reedelk.runtime.api.annotation.ESBComponent;
-import com.reedelk.runtime.api.annotation.Property;
-import com.reedelk.runtime.api.annotation.PropertyInfo;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.DefaultMessageAttributes;
@@ -27,12 +25,18 @@ import java.util.Optional;
 import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotNull;
 import static java.lang.String.format;
 
-@ESBComponent("File Delete")
+@ModuleComponent(
+        name = "File Delete",
+        description = "Deletes a file from the file system with the given File name. " +
+                "An error is raised if the given file could not be found. " +
+                "The file name can be a dynamic expression.")
 @Component(service = FileDelete.class, scope = ServiceScope.PROTOTYPE)
 public class FileDelete implements ProcessorSync {
 
+    @Hint("/var/logs/sample.txt")
+    @Example("/var/logs/log1.txt")
     @Property("File name")
-    @PropertyInfo("The path and name of the file to be deleted from the file system.")
+    @PropertyDescription("The path and name of the file to be deleted from the file system.\t")
     private DynamicString fileName;
 
     @Reference

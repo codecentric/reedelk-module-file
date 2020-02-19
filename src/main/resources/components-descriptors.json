@@ -2,15 +2,16 @@
   "componentDescriptors": [
     {
       "hidden": false,
-      "displayName": "File Delete",
+      "displayName": "FileDelete",
       "fullyQualifiedName": "com.reedelk.file.component.FileDelete",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
+          "hintValue": "/var/logs/sample.txt",
           "displayName": "File name",
           "propertyName": "fileName",
           "defaultValue": "###USE_DEFAULT_VALUE###",
-          "propertyInfo": "The path and name of the file to be deleted from the file system.",
+          "propertyInfo": "The path and name of the file to be deleted from the file system.\t",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -23,7 +24,7 @@
     },
     {
       "hidden": false,
-      "displayName": "File Read",
+      "displayName": "FileRead",
       "fullyQualifiedName": "com.reedelk.file.component.FileRead",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
@@ -44,7 +45,7 @@
           "displayName": "Base path",
           "propertyName": "basePath",
           "defaultValue": "###USE_DEFAULT_VALUE###",
-          "propertyInfo": "Optional base path from which files with the given \u003ci\u003eFile name\u003c/i\u003e will be read from. The final file will be read from \u003cb\u003eBase Path + File Name\u003c/b\u003e.",
+          "propertyInfo": "Optional base path from which files with the given \u003ci\u003eFile name\u003c/i\u003e will be read from. The final file will be read from \u003ci\u003eBase Path\u003c/i\u003e + \u003ci\u003eFile Name\u003c/i\u003e.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -253,7 +254,7 @@
                   "whenDescriptors": []
                 },
                 {
-                  "hintValue": "3",
+                  "hintValue": "5",
                   "displayName": "Lock retry max attempts",
                   "propertyName": "lockRetryMaxAttempts",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
@@ -272,11 +273,11 @@
                   ]
                 },
                 {
-                  "hintValue": "500",
+                  "hintValue": "700",
                   "displayName": "Lock retry wait time (ms)",
                   "propertyName": "lockRetryWaitTime",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
-                  "propertyInfo": "Sets the wait time between two file lock attempts.",
+                  "propertyInfo": "Sets the wait time between two file lock attempts in milliseconds.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -295,6 +296,7 @@
                   "displayName": "Read buffer size",
                   "propertyName": "readBufferSize",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "The buffer size used to read the files from filesystem. This parameter can be used to improve read performances. If the files are big the buffer size should be bigger, otherwise for very small files it should be kept smaller.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -313,11 +315,12 @@
     },
     {
       "hidden": false,
-      "displayName": "File Write",
+      "displayName": "FileWrite",
       "fullyQualifiedName": "com.reedelk.file.component.FileWrite",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
+          "hintValue": "/var/logs/log1.txt",
           "displayName": "File name",
           "propertyName": "filePath",
           "defaultValue": "###USE_DEFAULT_VALUE###",
@@ -334,7 +337,7 @@
           "displayName": "Base path",
           "propertyName": "basePath",
           "defaultValue": "###USE_DEFAULT_VALUE###",
-          "propertyInfo": "Optional base path from which files with the given \u003ci\u003eFile name\u003c/i\u003e will be written to. The final file will be written into \u003cb\u003eBase Path + File Name\u003c/b\u003e.",
+          "propertyInfo": "Optional base path from which files with the given \u003ci\u003eFile name\u003c/i\u003e will be written to. The final file will be written into \u003ci\u003eBase Path\u003c/i\u003e + \u003ci\u003eFile Name\u003c/i\u003e.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -346,8 +349,8 @@
         {
           "displayName": "Write mode",
           "propertyName": "mode",
-          "defaultValue": "###USE_DEFAULT_VALUE###",
-          "propertyInfo": "Sets the file write mode.",
+          "defaultValue": "OVERWRITE",
+          "propertyInfo": "Sets the file write mode. Possible values are \u003cb\u003eOVERWRITE\u003c/b\u003e, \u003cb\u003eCREATE_NEW\u003c/b\u003e, \u003cb\u003eAPPEND\u003c/b\u003e.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeEnumDescriptor",
             "instance": {
@@ -422,7 +425,7 @@
                   "displayName": "Lock retry wait time (ms)",
                   "propertyName": "lockRetryWaitTime",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
-                  "propertyInfo": "Sets the wait time between two file lock attempts.",
+                  "propertyInfo": "Sets the wait time (in milliseconds) between two file lock attempts.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -441,6 +444,7 @@
                   "displayName": "Write buffer size",
                   "propertyName": "writeBufferSize",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "The buffer size used to write the files to filesystem. This parameter can be used to improve write performances. If the files are big the buffer size should be bigger, otherwise for very small files it should be kept smaller.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {

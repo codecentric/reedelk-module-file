@@ -5,9 +5,7 @@ import com.reedelk.file.write.FileWriteConfiguration;
 import com.reedelk.file.write.WriteConfiguration;
 import com.reedelk.file.write.WriteMode;
 import com.reedelk.file.write.Writer;
-import com.reedelk.runtime.api.annotation.ESBComponent;
-import com.reedelk.runtime.api.annotation.Property;
-import com.reedelk.runtime.api.annotation.PropertyInfo;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.OnResult;
 import com.reedelk.runtime.api.component.ProcessorAsync;
 import com.reedelk.runtime.api.converter.ConverterService;
@@ -31,7 +29,11 @@ import static com.reedelk.file.commons.Messages.FileWriteComponent.ERROR_FILE_WR
 import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
-@ESBComponent("File Write")
+@ModuleComponent(
+        name = "File Write",
+        description = "Writes a file to the file system to the given File name and optionally provided Base path. " +
+                "The write mode can be used to override an existing file, create new file if it does not exists " +
+                "or append to the existing file if exists already.")
 @Component(service = FileWrite.class, scope = ServiceScope.PROTOTYPE)
 public class FileWrite implements ProcessorAsync {
 
@@ -40,17 +42,23 @@ public class FileWrite implements ProcessorAsync {
     @Reference
     private ConverterService converterService;
 
+    @Example("/var/logs/log1.txt")
+    @Hint("/var/logs/log1.txt")
     @Property("File name")
-    @PropertyInfo("The path and name of the file to be written on the file system.")
+    @PropertyDescription("The path and name of the file to be written on the file system.")
     private DynamicString filePath;
 
+    @Example("/var/logs")
     @Property("Base path")
-    @PropertyInfo("Optional base path from which files with the given <i>File name</i> will be written to. " +
-            "The final file will be written into <b>Base Path + File Name</b>.")
+    @PropertyDescription("Optional base path from which files with the given <i>File name</i> will be written to. " +
+            "The final file will be written into <i>Base Path</i> + <i>File Name</i>.")
     private String basePath;
 
+    @Example("APPEND")
+    @InitValue("OVERWRITE")
+    @DefaultRenameMe("OVERWRITE")
     @Property("Write mode")
-    @PropertyInfo("Sets the file write mode.")
+    @PropertyDescription("Sets the file write mode. Possible values are <b>OVERWRITE</b>, <b>CREATE_NEW</b>, <b>APPEND</b>.")
     private WriteMode mode;
 
     @Property("Configuration")

@@ -10,33 +10,43 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = FileWriteConfiguration.class, scope = PROTOTYPE)
 public class FileWriteConfiguration implements Implementor {
 
+    @Example("true")
+    @DefaultRenameMe("false")
     @Property("Create directories")
-    @PropertyInfo("If true, missing directories will be created on the filesystem before writing the file.")
+    @PropertyDescription("If true, missing directories will be created on the filesystem before writing the file.")
     private Boolean createParentDirectory;
 
+    @Example("true")
+    @DefaultRenameMe("false")
     @Property("Lock file")
-    @PropertyInfo("If true a lock on the file is acquired before writing the content.")
+    @PropertyDescription("If true a lock on the file is acquired before writing the content.")
     private Boolean lockFile;
 
-    @Property("Lock retry max attempts")
     @Hint("3")
+    @Example("5")
+    @DefaultRenameMe("3")
     @When(propertyName = "lockFile", propertyValue = "true")
-    @PropertyInfo("Sets the max lock attempts before throwing an error.")
+    @Property("Lock retry max attempts")
+    @PropertyDescription("Sets the max lock attempts before throwing an error.")
     private Integer lockRetryMaxAttempts;
 
-    @Property("Lock retry wait time (ms)")
     @Hint("500")
+    @Example("600")
+    @DefaultRenameMe("500")
     @When(propertyName = "lockFile", propertyValue = "true")
-    @PropertyInfo("Sets the wait time between two file lock attempts.")
+    @Property("Lock retry wait time (ms)")
+    @PropertyDescription("Sets the wait time (in milliseconds) between two file lock attempts.")
     private Long lockRetryWaitTime;
 
-    @Property("Write buffer size")
     @Hint("65536")
+    @Example("524288")
+    @DefaultRenameMe("65536")
+    @Property("Write buffer size")
+    @PropertyDescription("The buffer size used to write the files to filesystem. " +
+            "This parameter can be used to improve write performances. " +
+            "If the files are big the buffer size should be bigger, otherwise for very small " +
+            "files it should be kept smaller.")
     private Integer writeBufferSize;
-
-    public boolean isCreateParentDirectory() {
-        return createParentDirectory;
-    }
 
     public void setCreateParentDirectory(boolean createParentDirectory) {
         this.createParentDirectory = createParentDirectory;
