@@ -11,14 +11,14 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 public class FileReadConfiguration implements Implementor {
 
     @Example("true")
-    @DefaultRenameMe("false")
+    @DefaultValue("false")
     @Property("Lock file")
     @PropertyDescription("If true a lock on the file is acquired before reading its content.")
     private Boolean lockFile;
 
     @Hint("5")
     @Example("7")
-    @DefaultRenameMe("3")
+    @DefaultValue("3")
     @When(propertyName = "lockFile", propertyValue = "true")
     @Property("Lock retry max attempts")
     @PropertyDescription("Sets the max lock attempts before throwing an error.")
@@ -26,7 +26,7 @@ public class FileReadConfiguration implements Implementor {
 
     @Hint("700")
     @Example("500")
-    @DefaultRenameMe("500")
+    @DefaultValue("500")
     @When(propertyName = "lockFile", propertyValue = "true")
     @Property("Lock retry wait time (ms)")
     @PropertyDescription("Sets the wait time between two file lock attempts in milliseconds.")
@@ -34,7 +34,7 @@ public class FileReadConfiguration implements Implementor {
 
     @Hint("65536")
     @Example("262144")
-    @DefaultRenameMe("65536")
+    @DefaultValue("65536")
     @Property("Read buffer size")
     @PropertyDescription("The buffer size used to read the files from filesystem. " +
             "This parameter can be used to improve read performances. " +

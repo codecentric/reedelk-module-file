@@ -56,7 +56,7 @@ public class FileWrite implements ProcessorAsync {
 
     @Example("APPEND")
     @InitValue("OVERWRITE")
-    @DefaultRenameMe("OVERWRITE")
+    @DefaultValue("OVERWRITE")
     @Property("Write mode")
     @PropertyDescription("Sets the file write mode. Possible values are <b>OVERWRITE</b>, <b>CREATE_NEW</b>, <b>APPEND</b>.")
     private WriteMode mode;

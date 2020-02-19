@@ -50,7 +50,7 @@ public class FileRead implements ProcessorSync {
 
     @Example("STREAM")
     @InitValue("DEFAULT")
-    @DefaultRenameMe("DEFAULT")
+    @DefaultValue("DEFAULT")
     @Property("Read mode")
     @PropertyDescription("Determines the read strategy. When <i>Default</i> the file is completely read into memory. " +
             "When <i>Stream</i> the file is read only on demand only when the message payload is being consumed. " +
@@ -59,7 +59,7 @@ public class FileRead implements ProcessorSync {
 
     @Example("false")
     @InitValue("true")
-    @DefaultRenameMe("false")
+    @DefaultValue("false")
     @Property("Auto mime type")
     @PropertyDescription("If true, the mime type of the payload is determined from the extension of the file read.")
     private boolean autoMimeType;
@@ -67,7 +67,7 @@ public class FileRead implements ProcessorSync {
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_TEXT_XML)
     @InitValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
-    @DefaultRenameMe(MimeType.MIME_TYPE_APPLICATION_BINARY)
+    @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @Property("Mime type")

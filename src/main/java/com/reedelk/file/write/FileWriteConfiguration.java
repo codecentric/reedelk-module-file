@@ -11,20 +11,20 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 public class FileWriteConfiguration implements Implementor {
 
     @Example("true")
-    @DefaultRenameMe("false")
+    @DefaultValue("false")
     @Property("Create directories")
     @PropertyDescription("If true, missing directories will be created on the filesystem before writing the file.")
     private Boolean createParentDirectory;
 
     @Example("true")
-    @DefaultRenameMe("false")
+    @DefaultValue("false")
     @Property("Lock file")
     @PropertyDescription("If true a lock on the file is acquired before writing the content.")
     private Boolean lockFile;
 
     @Hint("3")
     @Example("5")
-    @DefaultRenameMe("3")
+    @DefaultValue("3")
     @When(propertyName = "lockFile", propertyValue = "true")
     @Property("Lock retry max attempts")
     @PropertyDescription("Sets the max lock attempts before throwing an error.")
@@ -32,7 +32,7 @@ public class FileWriteConfiguration implements Implementor {
 
     @Hint("500")
     @Example("600")
-    @DefaultRenameMe("500")
+    @DefaultValue("500")
     @When(propertyName = "lockFile", propertyValue = "true")
     @Property("Lock retry wait time (ms)")
     @PropertyDescription("Sets the wait time (in milliseconds) between two file lock attempts.")
@@ -40,7 +40,7 @@ public class FileWriteConfiguration implements Implementor {
 
     @Hint("65536")
     @Example("524288")
-    @DefaultRenameMe("65536")
+    @DefaultValue("65536")
     @Property("Write buffer size")
     @PropertyDescription("The buffer size used to write the files to filesystem. " +
             "This parameter can be used to improve write performances. " +
