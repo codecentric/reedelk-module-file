@@ -10,39 +10,39 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = FileWriteConfiguration.class, scope = PROTOTYPE)
 public class FileWriteConfiguration implements Implementor {
 
+    @Property("Create directories")
     @Example("true")
     @DefaultValue("false")
-    @Property("Create directories")
-    @PropertyDescription("If true, missing directories will be created on the filesystem before writing the file.")
+    @Description("If true, missing directories will be created on the filesystem before writing the file.")
     private Boolean createParentDirectory;
 
+    @Property("Lock file")
     @Example("true")
     @DefaultValue("false")
-    @Property("Lock file")
-    @PropertyDescription("If true a lock on the file is acquired before writing the content.")
+    @Description("If true a lock on the file is acquired before writing the content.")
     private Boolean lockFile;
 
+    @Property("Lock retry max attempts")
     @Hint("3")
     @Example("5")
     @DefaultValue("3")
     @When(propertyName = "lockFile", propertyValue = "true")
-    @Property("Lock retry max attempts")
-    @PropertyDescription("Sets the max lock attempts before throwing an error.")
+    @Description("Sets the max lock attempts before throwing an error.")
     private Integer lockRetryMaxAttempts;
 
+    @Property("Lock retry wait time (ms)")
     @Hint("500")
     @Example("600")
     @DefaultValue("500")
     @When(propertyName = "lockFile", propertyValue = "true")
-    @Property("Lock retry wait time (ms)")
-    @PropertyDescription("Sets the wait time (in milliseconds) between two file lock attempts.")
+    @Description("Sets the wait time (in milliseconds) between two file lock attempts.")
     private Long lockRetryWaitTime;
 
+    @Property("Write buffer size")
     @Hint("65536")
     @Example("524288")
     @DefaultValue("65536")
-    @Property("Write buffer size")
-    @PropertyDescription("The buffer size used to write the files to filesystem. " +
+    @Description("The buffer size used to write the files to filesystem. " +
             "This parameter can be used to improve write performances. " +
             "If the files are big the buffer size should be bigger, otherwise for very small " +
             "files it should be kept smaller.")

@@ -25,18 +25,17 @@ import java.util.Optional;
 import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotNull;
 import static java.lang.String.format;
 
-@ModuleComponent(
-        name = "File Delete",
-        description = "Deletes a file from the file system with the given File name. " +
+@ModuleComponent("File Delete")
+@Description("Deletes a file from the file system with the given File name. " +
                 "An error is raised if the given file could not be found. " +
                 "The file name can be a dynamic expression.")
 @Component(service = FileDelete.class, scope = ServiceScope.PROTOTYPE)
 public class FileDelete implements ProcessorSync {
 
+    @Property("File name")
     @Hint("/var/logs/sample.txt")
     @Example("/var/logs/log1.txt")
-    @Property("File name")
-    @PropertyDescription("The path and name of the file to be deleted from the file system.\t")
+    @Description("The path and name of the file to be deleted from the file system.\t")
     private DynamicString fileName;
 
     @Reference

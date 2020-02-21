@@ -28,50 +28,49 @@ import static com.reedelk.file.read.FileReadAttribute.TIMESTAMP;
 import static com.reedelk.runtime.api.commons.ImmutableMap.of;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
-@ModuleComponent(
-        name = "File Read",
-        description = "Reads a file from the file system from the given File name and optionally provided Base path. " +
+@ModuleComponent("File Read")
+@Description("Reads a file from the file system from the given File name and optionally provided Base path. " +
                 "The file read strategy determines if the file should be streamed from the file system or " +
                 "loaded into memory before continuing with the execution of the flow. " +
                 "The component can also be configured to acquire a lock before reading the file.")
 @Component(service = FileRead.class, scope = ServiceScope.PROTOTYPE)
 public class FileRead implements ProcessorSync {
 
-    @Example("/var/logs/log1.txt")
     @Property("File name")
-    @PropertyDescription("The path and name of the file to be read from the file system.")
+    @Example("/var/logs/log1.txt")
+    @Description("The path and name of the file to be read from the file system.")
     private DynamicString fileName;
 
-    @Example("/var/logs")
     @Property("Base path")
-    @PropertyDescription("Optional base path from which files with the given <i>File name</i> will be read from. " +
+    @Example("/var/logs")
+    @Description("Optional base path from which files with the given <i>File name</i> will be read from. " +
             "The final file will be read from <i>Base Path</i> + <i>File Name</i>.")
     private String basePath;
 
+    @Property("Read mode")
     @Example("STREAM")
     @InitValue("DEFAULT")
     @DefaultValue("DEFAULT")
-    @Property("Read mode")
-    @PropertyDescription("Determines the read strategy. When <i>Default</i> the file is completely read into memory. " +
+    @Description("Determines the read strategy. When <i>Default</i> the file is completely read into memory. " +
             "When <i>Stream</i> the file is read only on demand only when the message payload is being consumed. " +
             "This is the preferred method to read large files from the filesystem.")
     private ReadMode mode;
 
+    @Property("Auto mime type")
     @Example("false")
     @InitValue("true")
     @DefaultValue("false")
-    @Property("Auto mime type")
-    @PropertyDescription("If true, the mime type of the payload is determined from the extension of the file read.")
+    @Description("If true, the mime type of the payload is determined from the extension of the file read.")
     private boolean autoMimeType;
 
+    @Property("Mime type")
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_TEXT_XML)
     @InitValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
-    @Property("Mime type")
-    @PropertyDescription("The mime type of the file read from the filesystem.")
+    @Description("The mime type of the file read from the filesystem.")
     private String mimeType;
 
     @Property("Configuration")

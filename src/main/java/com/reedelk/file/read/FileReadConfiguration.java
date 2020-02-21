@@ -10,33 +10,33 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = FileReadConfiguration.class, scope = PROTOTYPE)
 public class FileReadConfiguration implements Implementor {
 
+    @Property("Lock file")
     @Example("true")
     @DefaultValue("false")
-    @Property("Lock file")
-    @PropertyDescription("If true a lock on the file is acquired before reading its content.")
+    @Description("If true a lock on the file is acquired before reading its content.")
     private Boolean lockFile;
 
+    @Property("Lock retry max attempts")
     @Hint("5")
     @Example("7")
     @DefaultValue("3")
     @When(propertyName = "lockFile", propertyValue = "true")
-    @Property("Lock retry max attempts")
-    @PropertyDescription("Sets the max lock attempts before throwing an error.")
+    @Description("Sets the max lock attempts before throwing an error.")
     private Integer lockRetryMaxAttempts;
 
+    @Property("Lock retry wait time (ms)")
     @Hint("700")
     @Example("500")
     @DefaultValue("500")
     @When(propertyName = "lockFile", propertyValue = "true")
-    @Property("Lock retry wait time (ms)")
-    @PropertyDescription("Sets the wait time between two file lock attempts in milliseconds.")
+    @Description("Sets the wait time between two file lock attempts in milliseconds.")
     private Long lockRetryWaitTime;
 
+    @Property("Read buffer size")
     @Hint("65536")
     @Example("262144")
     @DefaultValue("65536")
-    @Property("Read buffer size")
-    @PropertyDescription("The buffer size used to read the files from filesystem. " +
+    @Description("The buffer size used to read the files from filesystem. " +
             "This parameter can be used to improve read performances. " +
             "If the files are big the buffer size should be bigger, " +
             "otherwise for very small files it should be kept smaller.")
