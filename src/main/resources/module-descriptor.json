@@ -249,7 +249,7 @@
             "instance": {
               "shared": "NO",
               "collapsible": "YES",
-              "typeFullyQualifiedName": "com.reedelk.file.read.FileReadConfiguration",
+              "typeFullyQualifiedName": "com.reedelk.file.component.FileReadConfiguration",
               "objectProperties": [
                 {
                   "name": "lockFile",
@@ -397,7 +397,7 @@
             "instance": {
               "shared": "NO",
               "collapsible": "YES",
-              "typeFullyQualifiedName": "com.reedelk.file.write.FileWriteConfiguration",
+              "typeFullyQualifiedName": "com.reedelk.file.component.FileWriteConfiguration",
               "objectProperties": [
                 {
                   "name": "createParentDirectory",

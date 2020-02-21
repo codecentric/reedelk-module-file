@@ -1,4 +1,4 @@
-package com.reedelk.file.write;
+package com.reedelk.file.component;
 
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.Implementor;

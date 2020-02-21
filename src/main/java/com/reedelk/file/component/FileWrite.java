@@ -1,7 +1,6 @@
 package com.reedelk.file.component;
 
 import com.reedelk.file.exception.FileWriteException;
-import com.reedelk.file.write.FileWriteConfiguration;
 import com.reedelk.file.write.WriteConfiguration;
 import com.reedelk.file.write.WriteMode;
 import com.reedelk.file.write.Writer;

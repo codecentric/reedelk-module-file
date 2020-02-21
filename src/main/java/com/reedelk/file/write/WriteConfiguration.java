@@ -1,6 +1,7 @@
 package com.reedelk.file.write;
 
 import com.reedelk.file.commons.LockType;
+import com.reedelk.file.component.FileWriteConfiguration;
 
 import java.util.Optional;
 
