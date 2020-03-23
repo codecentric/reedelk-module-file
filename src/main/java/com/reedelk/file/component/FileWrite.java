@@ -55,6 +55,7 @@ public class FileWrite implements ProcessorAsync {
     private WriteMode mode;
 
     @Property("Configuration")
+    @Group("Configuration")
     private FileWriteConfiguration configuration;
 
     @Reference

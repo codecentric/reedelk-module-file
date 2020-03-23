@@ -74,6 +74,7 @@ public class FileRead implements ProcessorSync {
     private String mimeType;
 
     @Property("Configuration")
+    @Group("Configuration")
     private FileReadConfiguration configuration;
 
     @Reference
