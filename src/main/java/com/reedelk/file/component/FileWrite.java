@@ -42,6 +42,7 @@ public class FileWrite implements ProcessorAsync {
     private DynamicString filePath;
 
     @Property("Base path")
+    @Hint("/var/logs")
     @Example("/var/logs")
     @Description("Optional base path from which files with the given <i>File name</i> will be written to. " +
             "The final file will be written into <i>Base Path</i> + <i>File Name</i>.")

@@ -37,11 +37,13 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 public class FileRead implements ProcessorSync {
 
     @Property("File name")
+    @Hint("/var/logs/log1.txt")
     @Example("/var/logs/log1.txt")
     @Description("The path and name of the file to be read from the file system.")
     private DynamicString fileName;
 
     @Property("Base path")
+    @Hint("/var/logs")
     @Example("/var/logs")
     @Description("Optional base path from which files with the given <i>File name</i> will be read from. " +
             "The final file will be read from <i>Base Path</i> + <i>File Name</i>.")
