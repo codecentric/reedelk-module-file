@@ -70,7 +70,7 @@ public class FileExists implements ProcessorSync {
 
 
             // If the target variable has been set, we assign to a context variable
-            // the result of the Script evaluation and we return the original message.
+            // the result of the file exists check and we return the original message.
             if (target != null && isNotBlank(target.value())) {
                 service.evaluate(target, flowContext, message)
                         .ifPresent(contextVariableName -> flowContext.put(contextVariableName, exists));
