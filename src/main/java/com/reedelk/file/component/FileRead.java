@@ -67,8 +67,8 @@ public class FileRead implements ProcessorSync {
 
     @Property("Mime type")
     @MimeTypeCombo
-    @Example(MimeType.MIME_TYPE_TEXT_XML)
-    @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
+    @Example(MimeType.AsString.TEXT_XML)
+    @DefaultValue(MimeType.AsString.APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @Description("The mime type of the file read from the filesystem.")
