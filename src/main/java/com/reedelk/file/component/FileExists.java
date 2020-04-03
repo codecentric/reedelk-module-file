@@ -2,6 +2,7 @@ package com.reedelk.file.component;
 
 import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.DynamicValueUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.DefaultMessageAttributes;
@@ -24,7 +25,6 @@ import static com.reedelk.file.internal.read.FileReadAttribute.FILE_NAME;
 import static com.reedelk.file.internal.read.FileReadAttribute.TIMESTAMP;
 import static com.reedelk.runtime.api.commons.ImmutableMap.of;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
-import static com.reedelk.runtime.api.commons.StringUtils.isNotBlank;
 
 
 @ModuleComponent("File Exists")
@@ -71,9 +71,11 @@ public class FileExists implements ProcessorSync {
 
             // If the target variable has been set, we assign to a context variable
             // the result of the file exists check and we return the original message.
-            if (target != null && isNotBlank(target.value())) {
+
+            if (DynamicValueUtils.isNotNullOrBlank(target)) {
                 service.evaluate(target, flowContext, message)
-                        .ifPresent(contextVariableName -> flowContext.put(contextVariableName, exists));
+                        .ifPresent(contextVariableName ->
+                                flowContext.put(contextVariableName, exists));
                 return message;
 
             } else {

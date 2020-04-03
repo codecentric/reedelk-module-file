@@ -64,6 +64,7 @@ public class FileDelete implements ProcessorSync {
                     .attributes(attributes)
                     .build();
             return Optional.of(outMessage);
+
         }).orElse(MessageBuilder.get().empty().build());
     }
 
