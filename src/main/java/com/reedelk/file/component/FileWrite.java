@@ -1,9 +1,9 @@
 package com.reedelk.file.component;
 
-import com.reedelk.file.exception.FileWriteException;
-import com.reedelk.file.write.WriteConfiguration;
-import com.reedelk.file.write.WriteMode;
-import com.reedelk.file.write.Writer;
+import com.reedelk.file.internal.exception.FileWriteException;
+import com.reedelk.file.internal.write.WriteConfiguration;
+import com.reedelk.file.internal.write.WriteMode;
+import com.reedelk.file.internal.write.Writer;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.OnResult;
 import com.reedelk.runtime.api.component.ProcessorAsync;
@@ -23,8 +23,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static com.reedelk.file.commons.Messages.FileWriteComponent.ERROR_FILE_WRITE;
-import static com.reedelk.file.commons.Messages.FileWriteComponent.ERROR_FILE_WRITE_WITH_PATH;
+import static com.reedelk.file.internal.commons.Messages.FileWriteComponent.ERROR_FILE_WRITE;
+import static com.reedelk.file.internal.commons.Messages.FileWriteComponent.ERROR_FILE_WRITE_WITH_PATH;
 import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 

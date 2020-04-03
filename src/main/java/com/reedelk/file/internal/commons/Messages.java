@@ -1,4 +1,4 @@
-package com.reedelk.file.commons;
+package com.reedelk.file.internal.commons;
 
 public class Messages {
 

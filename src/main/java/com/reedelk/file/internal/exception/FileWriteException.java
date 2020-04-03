@@ -1,4 +1,4 @@
-package com.reedelk.file.exception;
+package com.reedelk.file.internal.exception;
 
 import com.reedelk.runtime.api.exception.ESBException;
 

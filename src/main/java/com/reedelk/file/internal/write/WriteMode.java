@@ -1,4 +1,4 @@
-package com.reedelk.file.write;
+package com.reedelk.file.internal.write;
 
 import com.reedelk.runtime.api.annotation.DisplayName;
 

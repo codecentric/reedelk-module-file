@@ -1,7 +1,7 @@
 package com.reedelk.file.component;
 
-import com.reedelk.file.delete.FileDeleteAttribute;
-import com.reedelk.file.exception.FileDeleteException;
+import com.reedelk.file.internal.delete.FileDeleteAttribute;
+import com.reedelk.file.internal.exception.FileDeleteException;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;

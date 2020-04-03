@@ -1,7 +1,7 @@
-package com.reedelk.file.commons;
+package com.reedelk.file.internal.commons;
 
-import com.reedelk.file.commons.Messages.Misc;
-import com.reedelk.file.exception.MaxRetriesExceeded;
+import com.reedelk.file.internal.commons.Messages.Misc;
+import com.reedelk.file.internal.exception.MaxRetriesExceeded;
 import com.reedelk.runtime.api.exception.ESBException;
 
 import java.util.function.Supplier;

@@ -1,4 +1,4 @@
-package com.reedelk.file.read;
+package com.reedelk.file.internal.read;
 
 import com.reedelk.runtime.api.commons.StreamUtils;
 import org.reactivestreams.Publisher;

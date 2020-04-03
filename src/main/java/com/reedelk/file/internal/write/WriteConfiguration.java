@@ -1,11 +1,11 @@
-package com.reedelk.file.write;
+package com.reedelk.file.internal.write;
 
-import com.reedelk.file.commons.LockType;
+import com.reedelk.file.internal.commons.LockType;
 import com.reedelk.file.component.FileWriteConfiguration;
 
 import java.util.Optional;
 
-import static com.reedelk.file.commons.Defaults.FileWrite.*;
+import static com.reedelk.file.internal.commons.Defaults.FileWrite.*;
 
 public class WriteConfiguration {
 

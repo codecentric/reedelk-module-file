@@ -1,4 +1,4 @@
-package com.reedelk.file.delete;
+package com.reedelk.file.internal.delete;
 
 import java.io.Serializable;
 import java.util.Map;

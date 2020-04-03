@@ -1,11 +1,11 @@
-package com.reedelk.file.read;
+package com.reedelk.file.internal.read;
 
-import com.reedelk.file.commons.FileChannelProvider;
-import com.reedelk.file.commons.FileOpenOptions;
-import com.reedelk.file.commons.FileOperation;
-import com.reedelk.file.exception.FileReadException;
-import com.reedelk.file.exception.MaxRetriesExceeded;
-import com.reedelk.file.exception.NotValidFileException;
+import com.reedelk.file.internal.commons.FileChannelProvider;
+import com.reedelk.file.internal.commons.FileOpenOptions;
+import com.reedelk.file.internal.commons.FileOperation;
+import com.reedelk.file.internal.exception.FileReadException;
+import com.reedelk.file.internal.exception.MaxRetriesExceeded;
+import com.reedelk.file.internal.exception.NotValidFileException;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
@@ -16,10 +16,10 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 
-import static com.reedelk.file.commons.Messages.FileReadComponent.FILE_IS_DIRECTORY;
-import static com.reedelk.file.commons.Messages.FileReadComponent.FILE_READ_ERROR;
-import static com.reedelk.file.commons.Messages.Misc.FILE_LOCK_MAX_RETRY_ERROR;
-import static com.reedelk.file.commons.Messages.Misc.FILE_NOT_FOUND;
+import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_IS_DIRECTORY;
+import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_READ_ERROR;
+import static com.reedelk.file.internal.commons.Messages.Misc.FILE_LOCK_MAX_RETRY_ERROR;
+import static com.reedelk.file.internal.commons.Messages.Misc.FILE_NOT_FOUND;
 import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf;
 
 public class ReadStrategyStream implements ReadStrategy {

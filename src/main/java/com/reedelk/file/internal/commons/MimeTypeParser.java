@@ -1,4 +1,4 @@
-package com.reedelk.file.commons;
+package com.reedelk.file.internal.commons;
 
 import com.reedelk.runtime.api.commons.FileUtils;
 import com.reedelk.runtime.api.message.content.MimeType;

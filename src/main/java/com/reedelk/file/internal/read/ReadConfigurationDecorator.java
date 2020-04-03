@@ -1,11 +1,11 @@
-package com.reedelk.file.read;
+package com.reedelk.file.internal.read;
 
-import com.reedelk.file.commons.LockType;
+import com.reedelk.file.internal.commons.LockType;
 import com.reedelk.file.component.FileReadConfiguration;
 
 import java.util.Optional;
 
-import static com.reedelk.file.commons.Defaults.FileRead.*;
+import static com.reedelk.file.internal.commons.Defaults.FileRead.*;
 
 public class ReadConfigurationDecorator {
 

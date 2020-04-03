@@ -1,4 +1,4 @@
-package com.reedelk.file.write;
+package com.reedelk.file.internal.write;
 
 public interface FileWriteAttribute {
     String FILE_NAME =  "writeFileName";

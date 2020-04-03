@@ -1,8 +1,8 @@
 package com.reedelk.file.component;
 
-import com.reedelk.file.commons.MimeTypeParser;
-import com.reedelk.file.exception.NotValidFileException;
-import com.reedelk.file.read.*;
+import com.reedelk.file.internal.commons.MimeTypeParser;
+import com.reedelk.file.internal.exception.NotValidFileException;
+import com.reedelk.file.internal.read.*;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
@@ -22,9 +22,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static com.reedelk.file.commons.Messages.FileReadComponent.FILE_NAME_ERROR;
-import static com.reedelk.file.read.FileReadAttribute.FILE_NAME;
-import static com.reedelk.file.read.FileReadAttribute.TIMESTAMP;
+import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_NAME_ERROR;
+import static com.reedelk.file.internal.read.FileReadAttribute.FILE_NAME;
+import static com.reedelk.file.internal.read.FileReadAttribute.TIMESTAMP;
 import static com.reedelk.runtime.api.commons.ImmutableMap.of;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
