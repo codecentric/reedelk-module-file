@@ -32,22 +32,6 @@ public class Messages {
         }
     }
 
-    public enum ModuleFileReadComponent implements FormattedMessage {
-
-        FILE_NOT_FOUND("Could not find file with name[%s], base path=[%s] in module with id=[%d]");
-
-        private String msg;
-
-        ModuleFileReadComponent(String msg) {
-            this.msg = msg;
-        }
-
-        @Override
-        public String format(Object... args) {
-            return formatMessage(msg, args);
-        }
-    }
-
     public enum FileWriteComponent implements FormattedMessage {
 
         ERROR_FILE_NOT_FOUND("Could not find file=[%s]. Check that all the directories in the path exist already or enable the option 'Create directories' in the File Write component"),
