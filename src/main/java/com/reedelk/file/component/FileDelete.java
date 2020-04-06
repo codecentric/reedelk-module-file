@@ -57,12 +57,14 @@ public class FileDelete implements ProcessorSync {
             }
 
             Map<String, Serializable> attributesMap = new HashMap<>();
-            MessageAttributes attributes = new DefaultMessageAttributes(FileDelete.class, attributesMap);
             FileDeleteAttribute.FILE_NAME.set(attributesMap, evaluatedFileNameToRemove);
+            MessageAttributes attributes = new DefaultMessageAttributes(FileDelete.class, attributesMap);
+
             Message outMessage = MessageBuilder.get()
                     .empty()
                     .attributes(attributes)
                     .build();
+
             return Optional.of(outMessage);
 
         }).orElse(MessageBuilder.get().empty().build());
