@@ -8,7 +8,7 @@ import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.OnResult;
 import com.reedelk.runtime.api.component.ProcessorAsync;
 import com.reedelk.runtime.api.converter.ConverterService;
-import com.reedelk.runtime.api.exception.ESBException;
+import com.reedelk.runtime.api.exception.PlatformException;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.content.TypedPublisher;
@@ -102,7 +102,7 @@ public class FileWrite implements ProcessorAsync {
             }
 
         } else {
-            callback.onError(flowContext, new ESBException("Could not write file"));
+            callback.onError(flowContext, new PlatformException("Could not write file"));
         }
     }
 

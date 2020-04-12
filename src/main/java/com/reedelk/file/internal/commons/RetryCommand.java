@@ -2,7 +2,7 @@ package com.reedelk.file.internal.commons;
 
 import com.reedelk.file.internal.commons.Messages.Misc;
 import com.reedelk.file.internal.exception.MaxRetriesExceeded;
-import com.reedelk.runtime.api.exception.ESBException;
+import com.reedelk.runtime.api.exception.PlatformException;
 
 import java.util.function.Supplier;
 
@@ -55,7 +55,7 @@ public class RetryCommand {
 
             } catch (InterruptedException exception) {
 
-                throw new ESBException(exception);
+                throw new PlatformException(exception);
 
             } catch (Exception exception) {
 
@@ -73,7 +73,7 @@ public class RetryCommand {
 
                 } else {
 
-                    throw new ESBException(exception);
+                    throw new PlatformException(exception);
 
                 }
             }

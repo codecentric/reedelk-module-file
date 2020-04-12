@@ -1,8 +1,8 @@
 package com.reedelk.file.internal.exception;
 
-import com.reedelk.runtime.api.exception.ESBException;
+import com.reedelk.runtime.api.exception.PlatformException;
 
-public class NotValidFileException extends ESBException {
+public class NotValidFileException extends PlatformException {
 
     public NotValidFileException(String message) {
         super(message);
