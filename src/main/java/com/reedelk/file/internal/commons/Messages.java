@@ -1,16 +1,10 @@
 package com.reedelk.file.internal.commons;
 
+import com.reedelk.runtime.api.commons.FormattedMessage;
+
 public class Messages {
 
     private Messages() {
-    }
-
-    private static String formatMessage(String template, Object ...args) {
-        return String.format(template, args);
-    }
-
-    interface FormattedMessage {
-        String format(Object ...args);
     }
 
     public enum FileReadComponent implements FormattedMessage {
@@ -20,15 +14,15 @@ public class Messages {
         FILE_LOCK_ERROR("Could not acquire lock on file=[%s]: %s"),
         FILE_READ_ERROR("Could not read file=[%s]: %s");
 
-        private String msg;
+        private String message;
 
-        FileReadComponent(String msg) {
-            this.msg = msg;
+        FileReadComponent(String message) {
+            this.message = message;
         }
 
         @Override
-        public String format(Object... args) {
-            return formatMessage(msg, args);
+        public String template() {
+            return message;
         }
     }
 
@@ -39,17 +33,16 @@ public class Messages {
         ERROR_FILE_WRITE_WITH_PATH("Could not write file with path=[%s]: %s"),
         ERROR_FILE_WRITE("Could not write file: %s");
 
-        private String msg;
+        private String message;
 
-        FileWriteComponent(String msg) {
-            this.msg = msg;
+        FileWriteComponent(String message) {
+            this.message = message;
         }
 
         @Override
-        public String format(Object... args) {
-            return formatMessage(msg, args);
+        public String template() {
+            return message;
         }
-
     }
 
     public enum Misc implements FormattedMessage {
@@ -58,16 +51,15 @@ public class Messages {
         FILE_LOCK_MAX_RETRY_ERROR("Could not acquire lock on file=[%s]: %s"),
         MAX_ATTEMPTS_EXCEEDED("Max retry attempts (%d) exceeded");
 
-        private String msg;
+        private String message;
 
-        Misc(String msg) {
-            this.msg = msg;
+        Misc(String message) {
+            this.message = message;
         }
 
         @Override
-        public String format(Object... args) {
-            return formatMessage(msg, args);
+        public String template() {
+            return message;
         }
-
     }
 }
