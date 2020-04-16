@@ -16,8 +16,8 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 
-import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_IS_DIRECTORY;
-import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_READ_ERROR;
+import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_IS_DIRECTORY;
+import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_READ_ERROR;
 import static com.reedelk.file.internal.commons.Messages.Misc.FILE_LOCK_MAX_RETRY_ERROR;
 import static com.reedelk.file.internal.commons.Messages.Misc.FILE_NOT_FOUND;
 import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf;

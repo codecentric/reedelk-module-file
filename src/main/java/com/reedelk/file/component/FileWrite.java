@@ -23,8 +23,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static com.reedelk.file.internal.commons.Messages.FileWriteComponent.ERROR_FILE_WRITE;
-import static com.reedelk.file.internal.commons.Messages.FileWriteComponent.ERROR_FILE_WRITE_WITH_PATH;
+import static com.reedelk.file.internal.commons.Messages.FileWrite.ERROR_FILE_WRITE;
+import static com.reedelk.file.internal.commons.Messages.FileWrite.ERROR_FILE_WRITE_WITH_PATH;
 import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 

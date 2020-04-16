@@ -6,9 +6,7 @@ import com.reedelk.file.internal.read.*;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
-import com.reedelk.runtime.api.message.DefaultMessageAttributes;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.script.ScriptEngineService;
@@ -18,11 +16,13 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.reactivestreams.Publisher;
 
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Optional;
 
-import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_NAME_ERROR;
+import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_NAME_ERROR;
 import static com.reedelk.file.internal.read.FileReadAttribute.FILE_NAME;
 import static com.reedelk.file.internal.read.FileReadAttribute.TIMESTAMP;
 import static com.reedelk.runtime.api.commons.ImmutableMap.of;
@@ -103,14 +103,14 @@ public class FileRead implements ProcessorSync {
 
             ReadConfigurationDecorator config = new ReadConfigurationDecorator(configuration);
 
-            MessageAttributes attributes = new DefaultMessageAttributes(FileRead.class,
-                    of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis()));
+            Map<String, Serializable> attributes =
+                    of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis());
 
             Publisher<byte[]> data = strategy.read(path, config);
 
-            return MessageBuilder.get()
-                    .attributes(attributes)
+            return MessageBuilder.get(FileRead.class)
                     .withBinary(data, actualMimeType)
+                    .attributes(attributes)
                     .build();
 
         }).orElseThrow(() -> new NotValidFileException(FILE_NAME_ERROR.format(fileName.toString())));
@@ -118,6 +118,10 @@ public class FileRead implements ProcessorSync {
 
     public void setConfiguration(FileReadConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public void setAutoMimeType(boolean autoMimeType) {
+        this.autoMimeType = autoMimeType;
     }
 
     public void setFileName(DynamicString fileName) {
@@ -128,15 +132,11 @@ public class FileRead implements ProcessorSync {
         this.basePath = basePath;
     }
 
-    public void setMode(ReadMode mode) {
-        this.mode = mode;
-    }
-
-    public void setAutoMimeType(boolean autoMimeType) {
-        this.autoMimeType = autoMimeType;
-    }
-
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
+    }
+
+    public void setMode(ReadMode mode) {
+        this.mode = mode;
     }
 }

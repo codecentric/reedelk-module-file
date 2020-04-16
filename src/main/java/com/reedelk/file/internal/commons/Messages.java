@@ -7,7 +7,7 @@ public class Messages {
     private Messages() {
     }
 
-    public enum FileReadComponent implements FormattedMessage {
+    public enum FileRead implements FormattedMessage {
 
         FILE_NAME_ERROR("Could not evaluate file with with name=[%s]"),
         FILE_IS_DIRECTORY("Could not read file=[%s]: is a directory"),
@@ -16,7 +16,7 @@ public class Messages {
 
         private String message;
 
-        FileReadComponent(String message) {
+        FileRead(String message) {
             this.message = message;
         }
 
@@ -26,7 +26,7 @@ public class Messages {
         }
     }
 
-    public enum FileWriteComponent implements FormattedMessage {
+    public enum FileWrite implements FormattedMessage {
 
         ERROR_FILE_NOT_FOUND("Could not find file=[%s]. Check that all the directories in the path exist already or enable the option 'Create directories' in the File Write component"),
         ERROR_FILE_WRITE_ALREADY_EXISTS("Could not write file=[%s]: the file already exists"),
@@ -35,7 +35,23 @@ public class Messages {
 
         private String message;
 
-        FileWriteComponent(String message) {
+        FileWrite(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public String template() {
+            return message;
+        }
+    }
+
+    public enum FileDelete implements FormattedMessage {
+
+        ERROR_FILE_DELETE("The file could not be deleted, cause=[%s].");
+
+        private String message;
+
+        FileDelete(String message) {
             this.message = message;
         }
 

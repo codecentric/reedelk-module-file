@@ -5,9 +5,7 @@ import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.commons.DynamicValueUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
-import com.reedelk.runtime.api.message.DefaultMessageAttributes;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
@@ -15,12 +13,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Optional;
 
-import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_NAME_ERROR;
+import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_NAME_ERROR;
 import static com.reedelk.file.internal.read.FileReadAttribute.FILE_NAME;
 import static com.reedelk.file.internal.read.FileReadAttribute.TIMESTAMP;
 import static com.reedelk.runtime.api.commons.ImmutableMap.of;
@@ -79,10 +79,10 @@ public class FileExists implements ProcessorSync {
                 return message;
 
             } else {
-                MessageAttributes attributes = new DefaultMessageAttributes(FileExists.class,
-                        of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis()));
+                Map<String, Serializable> attributes =
+                        of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis());
 
-                return MessageBuilder.get()
+                return MessageBuilder.get(FileExists.class)
                         .attributes(attributes)
                         .withJavaObject(exists)
                         .build();
@@ -91,24 +91,12 @@ public class FileExists implements ProcessorSync {
         }).orElseThrow(() -> new NotValidFileException(FILE_NAME_ERROR.format(fileName.toString())));
     }
 
-    public DynamicString getFileName() {
-        return fileName;
-    }
-
     public void setFileName(DynamicString fileName) {
         this.fileName = fileName;
     }
 
-    public String getBasePath() {
-        return basePath;
-    }
-
     public void setBasePath(String basePath) {
         this.basePath = basePath;
-    }
-
-    public DynamicString getTarget() {
-        return target;
     }
 
     public void setTarget(DynamicString target) {

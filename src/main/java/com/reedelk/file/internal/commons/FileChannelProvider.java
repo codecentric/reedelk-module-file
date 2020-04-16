@@ -10,7 +10,7 @@ import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
-import static com.reedelk.file.internal.commons.Messages.FileReadComponent.FILE_LOCK_ERROR;
+import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_LOCK_ERROR;
 import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf;
 
 public class FileChannelProvider {

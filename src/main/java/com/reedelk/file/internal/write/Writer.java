@@ -1,29 +1,29 @@
 package com.reedelk.file.internal.write;
 
+import com.reedelk.file.component.FileWrite;
 import com.reedelk.file.internal.commons.CloseableUtils;
 import com.reedelk.file.internal.commons.FileChannelProvider;
-import com.reedelk.file.component.FileWrite;
 import com.reedelk.file.internal.exception.FileWriteException;
 import com.reedelk.file.internal.exception.MaxRetriesExceeded;
 import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.runtime.api.component.OnResult;
 import com.reedelk.runtime.api.flow.FlowContext;
-import com.reedelk.runtime.api.message.DefaultMessageAttributes;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.TypedPublisher;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.util.Map;
 
-import static com.reedelk.file.internal.commons.Messages.FileWriteComponent.*;
+import static com.reedelk.file.internal.commons.Messages.FileWrite.*;
 import static com.reedelk.file.internal.commons.Messages.Misc.FILE_LOCK_MAX_RETRY_ERROR;
 import static com.reedelk.file.internal.write.FileWriteAttribute.FILE_NAME;
 import static com.reedelk.file.internal.write.FileWriteAttribute.TIMESTAMP;
@@ -114,9 +114,13 @@ public class Writer {
         }).doOnSuccess(initial -> {
 
             // On success build the message and invoke the callback.
-            MessageAttributes attributes = new DefaultMessageAttributes(FileWrite.class,
-                    of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis()));
-            Message outMessage = MessageBuilder.get().attributes(attributes).empty().build();
+            Map<String, Serializable> attributes =
+                    of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis());
+
+            Message outMessage = MessageBuilder.get(FileWrite.class)
+                    .attributes(attributes)
+                    .empty()
+                    .build();
 
             callback.onResult(flowContext, outMessage);
 
