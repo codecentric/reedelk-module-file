@@ -1,9 +1,9 @@
 package com.reedelk.file.component;
 
-import com.reedelk.file.internal.commons.MimeTypeParser;
 import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.file.internal.read.*;
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
@@ -97,7 +97,7 @@ public class FileRead implements ProcessorSync {
 
         return evaluated.map(filePath -> {
 
-            MimeType actualMimeType = MimeTypeParser.from(autoMimeType, mimeType, filePath, MimeType.APPLICATION_BINARY);
+            MimeType actualMimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, mimeType, filePath, MimeType.APPLICATION_BINARY);
 
             Path path = isBlank(basePath) ? Paths.get(filePath) : Paths.get(basePath, filePath);
 
