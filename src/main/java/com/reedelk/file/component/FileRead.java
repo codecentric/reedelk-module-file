@@ -97,7 +97,7 @@ public class FileRead implements ProcessorSync {
 
         return evaluated.map(filePath -> {
 
-            MimeType actualMimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, mimeType, filePath, MimeType.APPLICATION_BINARY);
+            MimeType actualMimeType = MimeTypeUtils.fromFileExtensionOrParse(autoMimeType, filePath, mimeType, MimeType.APPLICATION_BINARY);
 
             Path path = isBlank(basePath) ? Paths.get(filePath) : Paths.get(basePath, filePath);
 
