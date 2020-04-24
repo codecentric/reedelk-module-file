@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.reedelk.file.internal.commons.Messages.FileDelete.ERROR_FILE_DELETE;
-import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotNull;
+import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuration.requireNotNull;
 
 @ModuleComponent("File Delete")
 @Description("Deletes a file from the file system with the given File name. " +
