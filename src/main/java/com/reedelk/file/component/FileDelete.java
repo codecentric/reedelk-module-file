@@ -1,11 +1,12 @@
 package com.reedelk.file.component;
 
-import com.reedelk.file.internal.delete.FileDeleteAttribute;
+import com.reedelk.file.internal.attribute.FileAttribute;
 import com.reedelk.file.internal.exception.FileDeleteException;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
@@ -13,11 +14,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.reedelk.file.internal.commons.Messages.FileDelete.ERROR_FILE_DELETE;
@@ -54,11 +52,10 @@ public class FileDelete implements ProcessorSync {
                 throw new FileDeleteException(errorMessage, exception);
             }
 
-            Map<String, Serializable> attributesMap = new HashMap<>();
-            FileDeleteAttribute.FILE_NAME.set(attributesMap, evaluatedFileNameToRemove);
+            MessageAttributes attributes = new FileAttribute(evaluatedFileNameToRemove);
 
             Message outMessage = MessageBuilder.get(FileDelete.class)
-                    .attributes(attributesMap)
+                    .attributes(attributes)
                     .empty()
                     .build();
 

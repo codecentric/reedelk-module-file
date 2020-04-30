@@ -1,5 +1,6 @@
 package com.reedelk.file.component;
 
+import com.reedelk.file.internal.attribute.FileAttribute;
 import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.file.internal.read.*;
 import com.reedelk.runtime.api.annotation.*;
@@ -7,6 +8,7 @@ import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.script.ScriptEngineService;
@@ -16,16 +18,11 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.reactivestreams.Publisher;
 
-import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_NAME_ERROR;
-import static com.reedelk.file.internal.read.FileReadAttribute.FILE_NAME;
-import static com.reedelk.file.internal.read.FileReadAttribute.TIMESTAMP;
-import static com.reedelk.runtime.api.commons.ImmutableMap.of;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
 @ModuleComponent("File Read")
@@ -103,8 +100,7 @@ public class FileRead implements ProcessorSync {
 
             ReadConfigurationDecorator config = new ReadConfigurationDecorator(configuration);
 
-            Map<String, Serializable> attributes =
-                    of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis());
+            MessageAttributes attributes = new FileAttribute(path.toString());
 
             Publisher<byte[]> data = strategy.read(path, config);
 

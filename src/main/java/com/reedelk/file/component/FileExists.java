@@ -1,11 +1,13 @@
 package com.reedelk.file.component;
 
+import com.reedelk.file.internal.attribute.FileAttribute;
 import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.commons.DynamicValueUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
@@ -13,17 +15,12 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_NAME_ERROR;
-import static com.reedelk.file.internal.read.FileReadAttribute.FILE_NAME;
-import static com.reedelk.file.internal.read.FileReadAttribute.TIMESTAMP;
-import static com.reedelk.runtime.api.commons.ImmutableMap.of;
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
 
@@ -68,7 +65,6 @@ public class FileExists implements ProcessorSync {
 
             boolean exists = Files.exists(path);
 
-
             // If the target variable has been set, we assign to a context variable
             // the result of the file exists check and we return the original message.
 
@@ -79,9 +75,7 @@ public class FileExists implements ProcessorSync {
                 return message;
 
             } else {
-                Map<String, Serializable> attributes =
-                        of(FILE_NAME, path.toString(), TIMESTAMP, System.currentTimeMillis());
-
+                MessageAttributes attributes = new FileAttribute(path.toString());
                 return MessageBuilder.get(FileExists.class)
                         .attributes(attributes)
                         .withJavaObject(exists)
