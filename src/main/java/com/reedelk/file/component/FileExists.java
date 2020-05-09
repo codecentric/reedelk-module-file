@@ -7,7 +7,6 @@ import com.reedelk.runtime.api.commons.DynamicValueUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
@@ -25,6 +24,10 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
 
 @ModuleComponent("File Exists")
+@ComponentOutput(
+        attributes = FileAttribute.class,
+        payload = boolean.class,
+        description = "True if the file exists, false otherwise.")
 @Description("The File Exists component Tests whether a file with the given path exists. " +
         "The file path can be a text only or dynamic expression.")
 @Component(service = FileExists.class, scope = ServiceScope.PROTOTYPE)
@@ -75,7 +78,7 @@ public class FileExists implements ProcessorSync {
                 return message;
 
             } else {
-                MessageAttributes attributes = new FileAttribute(path.toString());
+                FileAttribute attributes = new FileAttribute(path.toString());
                 return MessageBuilder.get(FileExists.class)
                         .attributes(attributes)
                         .withJavaObject(exists)

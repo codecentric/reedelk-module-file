@@ -10,7 +10,6 @@ import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.runtime.api.component.OnResult;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.TypedPublisher;
 import reactor.core.Exceptions;
@@ -111,7 +110,7 @@ public class Writer {
         }).doOnSuccess(initial -> {
 
             // On success build the message and invoke the callback.
-            MessageAttributes attributes = new FileAttribute(path.toString());
+            FileAttribute attributes = new FileAttribute(path.toString());
 
             Message outMessage = MessageBuilder.get(FileWrite.class)
                     .attributes(attributes)

@@ -47,6 +47,7 @@ public class Messages {
 
     public enum FileDelete implements FormattedMessage {
 
+        FILE_NAME_ERROR("Could not evaluate file with with name=[%s]"),
         ERROR_FILE_DELETE("The file could not be deleted, cause=[%s].");
 
         private String message;

@@ -1,5 +1,6 @@
 package com.reedelk.file.component;
 
+import com.reedelk.file.internal.attribute.FileAttribute;
 import com.reedelk.file.internal.exception.FileWriteException;
 import com.reedelk.file.internal.write.WriteConfiguration;
 import com.reedelk.file.internal.write.WriteMode;
@@ -29,6 +30,9 @@ import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
 @ModuleComponent("File Write")
+@ComponentOutput(
+        attributes = FileAttribute.class,
+        payload = Void.class)
 @Description("Writes a file to the file system to the given File name and optionally provided Base path. " +
                 "The write mode can be used to override an existing file, create new file if it does not exists " +
                 "or append to the existing file if exists already.")

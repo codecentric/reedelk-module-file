@@ -2,12 +2,13 @@ package com.reedelk.file.component;
 
 import com.reedelk.file.internal.attribute.FileAttribute;
 import com.reedelk.file.internal.exception.FileDeleteException;
+import com.reedelk.file.internal.exception.NotValidFileException;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
+import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
 import org.osgi.service.component.annotations.Component;
@@ -15,13 +16,19 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
 import static com.reedelk.file.internal.commons.Messages.FileDelete.ERROR_FILE_DELETE;
+import static com.reedelk.file.internal.commons.Messages.FileDelete.FILE_NAME_ERROR;
 import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuration.requireNotNull;
 
 @ModuleComponent("File Delete")
+@ComponentOutput(
+        attributes = FileAttribute.class,
+        payload = String.class,
+        description = "The path and name of the deleted file.")
 @Description("Deletes a file from the file system with the given File name. " +
                 "An error is raised if the given file could not be found. " +
                 "The file name can be a dynamic expression.")
@@ -45,23 +52,25 @@ public class FileDelete implements ProcessorSync {
     @Override
     public Message apply(FlowContext flowContext, Message message) {
         return service.evaluate(fileName, flowContext, message).flatMap(evaluatedFileNameToRemove -> {
+            Path filePathToDelete;
             try {
-                Files.delete(Paths.get(evaluatedFileNameToRemove));
+                filePathToDelete = Paths.get(evaluatedFileNameToRemove);
+                Files.delete(filePathToDelete);
             } catch (Exception exception) {
                 String errorMessage = ERROR_FILE_DELETE.format(exception.getMessage());
                 throw new FileDeleteException(errorMessage, exception);
             }
 
-            MessageAttributes attributes = new FileAttribute(evaluatedFileNameToRemove);
+            FileAttribute attributes = new FileAttribute(evaluatedFileNameToRemove);
 
             Message outMessage = MessageBuilder.get(FileDelete.class)
                     .attributes(attributes)
-                    .empty()
+                    .withString(filePathToDelete.toString(), MimeType.TEXT_PLAIN)
                     .build();
 
             return Optional.of(outMessage);
 
-        }).orElse(MessageBuilder.get(FileDelete.class).empty().build());
+        }).orElseThrow(() -> new NotValidFileException(FILE_NAME_ERROR.format(fileName.toString())));
     }
 
     public void setFileName(DynamicString fileName) {

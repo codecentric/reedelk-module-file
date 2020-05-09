@@ -8,7 +8,6 @@ import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.script.ScriptEngineService;
@@ -26,7 +25,11 @@ import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_NAME_ERRO
 import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 
 @ModuleComponent("File Read")
-@Description("Reads a file from the file system from the given File name and optionally provided Base path. " +
+@ComponentOutput(
+        attributes = FileAttribute.class,
+        payload = byte[].class,
+        description = "The content of the file read from the file system from the given path and file name.")
+@Description("Reads a file from the file system from the given file name and optionally provided base path. " +
                 "The file read strategy determines if the file should be streamed from the file system or " +
                 "loaded into memory before continuing with the execution of the flow. " +
                 "The component can also be configured to acquire a lock before reading the file.")
@@ -100,7 +103,7 @@ public class FileRead implements ProcessorSync {
 
             ReadConfigurationDecorator config = new ReadConfigurationDecorator(configuration);
 
-            MessageAttributes attributes = new FileAttribute(path.toString());
+            FileAttribute attributes = new FileAttribute(path.toString());
 
             Publisher<byte[]> data = strategy.read(path, config);
 
