@@ -29,6 +29,9 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
         attributes = FileAttribute.class,
         payload = byte[].class,
         description = "The content of the file read from the file system from the given path and file name.")
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is used to evaluate the file name to read.")
 @Description("Reads a file from the file system from the given file name and optionally provided base path. " +
                 "The file read strategy determines if the file should be streamed from the file system or " +
                 "loaded into memory before continuing with the execution of the flow. " +

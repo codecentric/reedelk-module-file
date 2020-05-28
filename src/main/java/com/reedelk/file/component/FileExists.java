@@ -28,6 +28,9 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
         attributes = FileAttribute.class,
         payload = boolean.class,
         description = "True if the file exists, false otherwise.")
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is used to evaluate the file name to check for existence.")
 @Description("The File Exists component Tests whether a file with the given path exists. " +
         "The file path can be a text only or dynamic expression.")
 @Component(service = FileExists.class, scope = ServiceScope.PROTOTYPE)

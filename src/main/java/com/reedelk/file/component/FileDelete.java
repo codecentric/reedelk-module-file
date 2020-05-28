@@ -29,6 +29,9 @@ import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuratio
         attributes = FileAttribute.class,
         payload = String.class,
         description = "The path and name of the deleted file.")
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is used to evaluate the file name to delete.")
 @Description("Deletes a file from the file system with the given File name. " +
                 "An error is raised if the given file could not be found. " +
                 "The file name can be a dynamic expression.")
@@ -51,11 +54,16 @@ public class FileDelete implements ProcessorSync {
 
     @Override
     public Message apply(FlowContext flowContext, Message message) {
+
         return service.evaluate(fileName, flowContext, message).flatMap(evaluatedFileNameToRemove -> {
             Path filePathToDelete;
+
             try {
+
                 filePathToDelete = Paths.get(evaluatedFileNameToRemove);
+
                 Files.delete(filePathToDelete);
+
             } catch (Exception exception) {
                 String errorMessage = ERROR_FILE_DELETE.format(exception.getMessage());
                 throw new FileDeleteException(errorMessage, exception);

@@ -33,6 +33,9 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
 @ComponentOutput(
         attributes = FileAttribute.class,
         payload = Void.class)
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is used to evaluate the file name to write.")
 @Description("Writes a file to the file system to the given File name and optionally provided Base path. " +
                 "The write mode can be used to override an existing file, create new file if it does not exists " +
                 "or append to the existing file if exists already.")
@@ -43,7 +46,7 @@ public class FileWrite implements ProcessorAsync {
     @Hint("/var/logs/log1.txt")
     @Example("/var/logs/log1.txt")
     @Description("The path and name of the file to be written on the file system.")
-    private DynamicString filePath;
+    private DynamicString fileName;
 
     @Property("Base path")
     @Hint("/var/logs")
@@ -74,7 +77,7 @@ public class FileWrite implements ProcessorAsync {
     public void apply(FlowContext flowContext, Message message, OnResult callback) {
 
 
-        Optional<String> evaluated = scriptService.evaluate(filePath, flowContext, message);
+        Optional<String> evaluated = scriptService.evaluate(fileName, flowContext, message);
 
         if (evaluated.isPresent()) {
 
@@ -110,8 +113,8 @@ public class FileWrite implements ProcessorAsync {
         }
     }
 
-    public void setFilePath(DynamicString filePath) {
-        this.filePath = filePath;
+    public void setFileName(DynamicString fileName) {
+        this.fileName = fileName;
     }
 
     public void setBasePath(String basePath) {
