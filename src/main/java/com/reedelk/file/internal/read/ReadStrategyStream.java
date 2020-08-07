@@ -77,7 +77,7 @@ public class ReadStrategyStream implements ReadStrategy {
                 String message = FILE_NOT_FOUND.format(path.toString());
                 sink.error(new NotValidFileException(message));
 
-            } catch (Exception exception) {
+            } catch (Throwable exception) {
 
                 if (exception instanceof FileReadException) {
                     sink.error(exception);
