@@ -62,10 +62,14 @@ public class ReadStrategyStream implements ReadStrategy {
 
                     byteBuffer.get(chunk);
 
-                    byteBuffer.clear();
-
                     sink.next(chunk);
+
+                    byteBuffer.clear();
                 }
+
+                byteBuffer.clear();
+
+                byteBuffer = null;
 
                 sink.complete();
 

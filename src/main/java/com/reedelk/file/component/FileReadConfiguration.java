@@ -6,7 +6,6 @@ import org.osgi.service.component.annotations.Component;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@Collapsible
 @Component(service = FileReadConfiguration.class, scope = PROTOTYPE)
 public class FileReadConfiguration implements Implementor {
 
@@ -33,13 +32,14 @@ public class FileReadConfiguration implements Implementor {
     private Long lockRetryWaitTime;
 
     @Property("Read buffer size")
-    @Hint("65536")
-    @Example("262144")
-    @DefaultValue("65536")
+    @Hint("524288")
+    @Example("524288")
+    @DefaultValue("1048576")
     @Description("The buffer size used to read the files from filesystem. " +
             "This parameter can be used to improve read performances. " +
             "If the files are big the buffer size should be bigger, " +
-            "otherwise for very small files it should be kept smaller.")
+            "otherwise for very small files it should be kept smaller. " +
+            "The read buffer size is expressed in bytes and it can only be applied when the read mode strategy is 'Stream'.")
     private Integer readBufferSize;
 
     public Boolean getLockFile() {

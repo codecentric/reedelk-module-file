@@ -1,5 +1,10 @@
 [
   {
+    "version": "1.0.1",
+    "date": "//TODO: Add date",
+    "release-notes": "<ul><li>Bugfix: Fixed default read strategy.</li><li>Bugfix: Changed default read buffer size for stream base strategies to 1048576 bytes.</li><ul>"
+  },
+  {
     "version": "1.0.0",
     "date": "22/6/2020",
     "release-notes": "<ul><li>First module-file release.</li><ul>"

@@ -1,21 +1,25 @@
 package com.reedelk.file.internal.read;
 
-import com.reedelk.runtime.api.commons.StreamUtils;
+import com.reedelk.file.internal.exception.FileReadException;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ReadStrategyDefault extends ReadStrategyStream {
+import static com.reedelk.file.internal.commons.Messages.FileRead.FILE_READ_ERROR;
+
+public class ReadStrategyDefault implements ReadStrategy {
 
     @Override
     public Publisher<byte[]> read(Path path, ReadConfigurationDecorator config) {
-
-        Publisher<byte[]> read = super.read(path, config);
-
-        // We immediately consume the content.
-        byte[] consume = StreamUtils.FromByteArray.consume(read);
-
-        return Mono.just(consume);
+        try {
+            byte[] bytes = Files.readAllBytes(path);
+            return Mono.just(bytes);
+        } catch (IOException e) {
+            String message = FILE_READ_ERROR.format(path, e.getMessage());
+            throw new FileReadException(message, e);
+        }
     }
 }
