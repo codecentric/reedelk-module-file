@@ -34,8 +34,8 @@ import static com.reedelk.runtime.api.commons.StringUtils.isBlank;
         attributes = FileAttribute.class,
         payload = Void.class)
 @ComponentInput(
-        payload = Object.class,
-        description = "The input payload is used to evaluate the file name to write.")
+        payload = { byte[].class, String.class },
+        description = "The data to be written on the file. The expected input is byte array or string.")
 @Description("Writes a file to the file system to the given File name and optionally provided Base path. " +
                 "The write mode can be used to override an existing file, create new file if it does not exists " +
                 "or append to the existing file if exists already.")
