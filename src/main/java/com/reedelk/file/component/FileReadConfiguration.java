@@ -32,9 +32,9 @@ public class FileReadConfiguration implements Implementor {
     private Long lockRetryWaitTime;
 
     @Property("Read buffer size")
-    @Hint("1024")
-    @Example("1024")
-    @DefaultValue("1024")
+    @Hint("1024000")
+    @Example("1024000")
+    @DefaultValue("1024000")
     @Description("The buffer size used to read the files from filesystem. " +
             "This parameter can be used to improve read performances. " +
             "If the files are big the buffer size should be bigger, " +
