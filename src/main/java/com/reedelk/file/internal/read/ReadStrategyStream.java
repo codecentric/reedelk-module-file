@@ -6,7 +6,8 @@ import com.reedelk.file.internal.commons.FileOperation;
 import com.reedelk.file.internal.exception.FileReadException;
 import com.reedelk.file.internal.exception.MaxRetriesExceeded;
 import com.reedelk.file.internal.exception.NotValidFileException;
-import org.reactivestreams.Publisher;
+import com.reedelk.runtime.api.message.MessageBuilder;
+import com.reedelk.runtime.api.message.content.MimeType;
 import reactor.core.publisher.Flux;
 
 import java.nio.ByteBuffer;
@@ -24,7 +25,7 @@ import static com.reedelk.runtime.api.commons.StackTraceUtils.rootCauseMessageOf
 
 public class ReadStrategyStream implements ReadStrategy {
 
-    public Publisher<byte[]> read(Path path, ReadConfigurationDecorator config) {
+    public void read(Path path, ReadConfigurationDecorator config, MessageBuilder messageBuilder, MimeType actualMimeType) {
 
         if (Files.isDirectory(path)) {
             String message = FILE_IS_DIRECTORY.format(path.toString());
@@ -36,7 +37,7 @@ public class ReadStrategyStream implements ReadStrategy {
             throw new NotValidFileException(message);
         }
 
-        return Flux.create(sink -> {
+        Flux<byte[]> stream = Flux.create(sink -> {
 
             // This consumer is created only when a consumer
             // subscribes to the payload stream.
@@ -69,8 +70,6 @@ public class ReadStrategyStream implements ReadStrategy {
 
                 byteBuffer.clear();
 
-                byteBuffer = null;
-
                 sink.complete();
 
             } catch (NoSuchFileException exception) {
@@ -90,5 +89,7 @@ public class ReadStrategyStream implements ReadStrategy {
                 }
             }
         });
+
+        messageBuilder.withBinary(stream, actualMimeType);
     }
 }

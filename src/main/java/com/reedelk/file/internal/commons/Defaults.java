@@ -7,7 +7,7 @@ public class Defaults {
         private FileRead() {
         }
 
-        public static final int READ_FILE_BUFFER_SIZE = 1048576;
+        public static final int READ_FILE_BUFFER_SIZE = 1024;
         public static final int RETRY_MAX_ATTEMPTS = 3;
         public static final long RETRY_WAIT_TIME = 500;
     }

@@ -15,7 +15,6 @@ import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
-import org.reactivestreams.Publisher;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -108,10 +107,11 @@ public class FileRead implements ProcessorSync {
 
             FileAttribute attributes = new FileAttribute(path.toString());
 
-            Publisher<byte[]> data = strategy.read(path, config);
+            MessageBuilder messageBuilder = MessageBuilder.get(FileRead.class);
 
-            return MessageBuilder.get(FileRead.class)
-                    .withBinary(data, actualMimeType)
+            strategy.read(path, config, messageBuilder, actualMimeType);
+
+            return messageBuilder
                     .attributes(attributes)
                     .build();
 
