@@ -1,8 +1,13 @@
 [
   {
+    "version": "1.0.2",
+    "date": "",
+    "release-notes": "<ul><li>bugfix: File read component Default strategy reads all data into a byte array avoiding generating intermediate byte arrays to increase buffer capacity.</li><ul>"
+  },
+  {
     "version": "1.0.1",
     "date": "18/8/2020",
-    "release-notes": "<ul><li>Bugfix: Fixed default read strategy.</li><li>Bugfix: Changed default read buffer size for stream base strategies to 1048576 bytes.</li><ul>"
+    "release-notes": "<ul><li>bugfix: Fixed default read strategy.</li><li>Bugfix: Changed default read buffer size for stream base strategies to 1048576 bytes.</li><ul>"
   },
   {
     "version": "1.0.0",
