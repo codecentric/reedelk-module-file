@@ -32,14 +32,14 @@ public class FileReadConfiguration implements Implementor {
     private Long lockRetryWaitTime;
 
     @Property("Read buffer size")
-    @Hint("1024000")
-    @Example("1024000")
-    @DefaultValue("1024000")
+    @Hint("1024")
+    @Example("1024")
+    @DefaultValue("1024")
     @Description("The buffer size used to read the files from filesystem. " +
             "This parameter can be used to improve read performances. " +
             "If the files are big the buffer size should be bigger, " +
             "otherwise for very small files it should be kept smaller. " +
-            "The read buffer size is expressed in bytes and it can only be applied when the read mode strategy is 'Stream'.")
+            "The read buffer size is expressed in Kb and it can only be applied when the read mode strategy is 'Stream'.")
     private Integer readBufferSize;
 
     public Boolean getLockFile() {

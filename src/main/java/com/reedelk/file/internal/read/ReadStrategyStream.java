@@ -51,7 +51,7 @@ public class ReadStrategyStream implements ReadStrategy {
                     config.getRetryWaitTime(),
                     openOptions)) {
 
-                int readBufferSize = config.getReadBufferSize();
+                int readBufferSize = config.getReadBufferSizeInKb();
 
                 ByteBuffer byteBuffer = ByteBuffer.allocate(readBufferSize);
 

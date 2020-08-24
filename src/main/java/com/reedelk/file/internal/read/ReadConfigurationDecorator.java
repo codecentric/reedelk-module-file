@@ -1,7 +1,7 @@
 package com.reedelk.file.internal.read;
 
-import com.reedelk.file.internal.commons.LockType;
 import com.reedelk.file.component.FileReadConfiguration;
+import com.reedelk.file.internal.commons.LockType;
 
 import java.util.Optional;
 
@@ -10,13 +10,13 @@ import static com.reedelk.file.internal.commons.Defaults.FileRead.*;
 public class ReadConfigurationDecorator {
 
     private final LockType lockType;
-    private final int readBufferSize;
+    private final int readByfferSizeInKb;
     private final long retryWaitTime;
     private final int retryMaxAttempts;
 
     public ReadConfigurationDecorator(FileReadConfiguration configuration) {
         this.lockType = getLockType(configuration);
-        this.readBufferSize = getReadBufferSize(configuration);
+        this.readByfferSizeInKb = getReadBufferSizeInKb(configuration);
         this.retryMaxAttempts = getRetryMaxAttempts(configuration);
         this.retryWaitTime = getRetryWaitTime(configuration);
     }
@@ -33,14 +33,15 @@ public class ReadConfigurationDecorator {
         return retryWaitTime;
     }
 
-    int getReadBufferSize() {
-        return readBufferSize;
+    int getReadBufferSizeInKb() {
+        return readByfferSizeInKb;
     }
 
-    private int getReadBufferSize(FileReadConfiguration configuration) {
-        return Optional.ofNullable(configuration)
+    private int getReadBufferSizeInKb(FileReadConfiguration configuration) {
+        Integer kiloBytes = Optional.ofNullable(configuration)
                 .flatMap(config -> Optional.ofNullable(config.getReadBufferSize()))
-                .orElse(READ_FILE_BUFFER_SIZE);
+                .orElse(READ_FILE_BUFFER_SIZE_KB);
+        return bytesFrom(kiloBytes);
     }
 
     private LockType getLockType(FileReadConfiguration configuration) {
@@ -60,5 +61,11 @@ public class ReadConfigurationDecorator {
         return Optional.ofNullable(configuration)
                 .flatMap(config -> Optional.ofNullable(config.getLockRetryWaitTime()))
                 .orElse(RETRY_WAIT_TIME);
+    }
+
+    private static int bytesFrom(int kilobytes) {
+        // calculates Bytes
+        // 1 KB = 1024 bytes
+        return kilobytes * 1024;
     }
 }
