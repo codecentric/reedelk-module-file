@@ -43,7 +43,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/codecentric/reedelk-module-database</url>
+            <url>https://maven.pkg.github.com/codecentric/reedelk-module-file</url>
         </repository>
     </distributionManagement>
 
