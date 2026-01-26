@@ -15,7 +15,7 @@
     <artifactId>module-file</artifactId>
 
     <properties>
-        <assertj.version>3.11.1</assertj.version>
+        <assertj.version>3.27.7</assertj.version>
         <maven.compiler.release>8</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.5.2</junit.version>
